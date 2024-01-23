@@ -1,0 +1,13 @@
+version: '3.12'
+
+services:
+  python:
+    container_name: python-container
+    image: "python-container"
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    volumes:
+      - ./src:/var/task
+      - ./docker/requirements.txt:/tmp/requirements.txt
+    tty: true
