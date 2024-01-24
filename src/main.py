@@ -59,7 +59,7 @@ class Main:
             print('PDF: {}'.format(pdf_path.replace("/tmp/", "")))
             print('Size: {}'.format(os.path.getsize(pdf_path)))
             data = open(pdf_path, 'rb')
-            out_bucket = self.s3.Bucket(self.OUTPUT_BUKET)
+            out_bucket = self.s3.Bucket(Main.OUTPUT_BUKET)
             out_bucket.put_object(Key=pdf_path.replace("/tmp/", ""), Body=data)
             data.close()
         else:
