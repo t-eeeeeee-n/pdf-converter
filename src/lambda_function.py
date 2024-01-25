@@ -1,7 +1,7 @@
 import json
 from http import HTTPStatus
 
-from main import Main
+from main_bk import Main
 
 
 def lambda_handler(event, lambda_context):
