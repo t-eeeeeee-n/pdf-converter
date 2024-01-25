@@ -22,9 +22,10 @@ class Main:
         #     return 'test finished'
 
         # TODO
+        global base64_pdf
         self.event = json.loads(self.event['body'])
         input_key = self.event['key']
-        in_bucket = "libreoffice-input-ten"
+        in_bucket = self.s3.Bucket("libreoffice-input-ten")
 
         print(input_key)
 
