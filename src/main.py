@@ -5,16 +5,18 @@ import os
 
 
 class Main:
-    TEMP_DIR = "/tmp"
+    TEMP_DIR = "/tmp/"
 
     def __init__(self, event):
+        print(event)
         self.body = json.loads(event["body"])
+        print(self.body)
 
     def exec(self):
         input_base64_file: bytes = self.body["file"]
         file_name: str = self.body["fileName"]
 
-        # Base64データを文字列に変換（オプション）
+        # Base64データを文字列に変換
         decoded_file: bytes = base64.b64decode(input_base64_file)
         with open(f"{Main.TEMP_DIR}{file_name}", 'wb') as file:
             file.write(decoded_file)
@@ -31,7 +33,7 @@ class Main:
         command.append("pdf:writer_pdf_Export")
         command.append("--outdir")
         command.append(Main.TEMP_DIR)
-        command.append(f"{Main.TEMP_DIR}/{file_name}")
+        command.append(f"{Main.TEMP_DIR}{file_name}")
 
         # コマンドを実行
         result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
