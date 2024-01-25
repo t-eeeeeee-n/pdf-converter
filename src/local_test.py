@@ -36,12 +36,12 @@ def convert_to_pdf(input_path, output_folder):
 
     # コマンドを実行
     result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    print('STDOUT: {}'.format(result.stdout))
+    print('STDERR: {}'.format(result.stderr))
 
     # 変換後のPDFファイルパスを生成
     pdf_filename: str = os.path.basename(input_path).rsplit('.', 1)[0] + '.pdf'
     pdf_path: str = os.path.join(output_folder, pdf_filename)
-    print('STDOUT: {}'.format(result.stdout))
-    print('STDERR: {}'.format(result.stderr))
 
     base64_pdf: bytes
 

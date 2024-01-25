@@ -1,3 +1,4 @@
+import base64
 import subprocess
 import boto3
 import os
@@ -62,7 +63,15 @@ class Main:
             out_bucket = self.s3.Bucket(Main.OUTPUT_BUKET)
             out_bucket.put_object(Key=pdf_path.replace("/tmp/", ""), Body=data)
             data.close()
+            base64_pdf = self.file_to_base64(pdf_path)
         else:
             print("The PDF file({}) cannot be found".format(pdf_path))
 
-        return ''
+        return base64_pdf
+
+    @classmethod
+    def file_to_base64(cls, file_path: str) -> base64:
+        with open(file_path, 'rb') as file:
+            binary_file = file.read()
+        input_base64_file: base64 = base64.b64encode(binary_file)
+        return input_base64_file
