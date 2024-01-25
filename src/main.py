@@ -1,4 +1,5 @@
 import base64
+import json
 import subprocess
 import boto3
 import os
@@ -13,12 +14,17 @@ class Main:
         self.s3 = boto3.resource('s3')
 
     def exec(self):
-        if 'Records' in self.event.keys():
-            input_bucket = self.event['Records'][0]['s3']['bucket']['name']
-            input_key = urllib.parse.unquote_plus(self.event['Records'][0]['s3']['object']['key'], encoding='utf-8')
-            in_bucket = self.s3.Bucket(input_bucket)
-        else:
-            return 'test finished'
+        # if 'Records' in self.event.keys():
+        #     input_bucket = self.event['Records'][0]['s3']['bucket']['name']
+        #     input_key = urllib.parse.unquote_plus(self.event['Records'][0]['s3']['object']['key'], encoding='utf-8')
+        #     in_bucket = self.s3.Bucket(input_bucket)
+        # else:
+        #     return 'test finished'
+
+        # TODO
+        self.event = json.loads(self.event['body'])
+        input_key = self.event['key']
+        in_bucket = "libreoffice-input-ten"
 
         print(input_key)
 
